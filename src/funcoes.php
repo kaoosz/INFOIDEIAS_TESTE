@@ -14,8 +14,22 @@ class Funcoes
 	Ano 1700 = século 17
 
      * */
-    public function SeculoAno(int $ano): int {
+    public function SeculoAno(int $ano): int
+    {        
+        if ($ano <= 0)
+            echo "0 ou negativo";
         
+        // If year is between 1 to 100 it
+        // will come in 1st century
+        else if($ano <= 100)
+            echo "século\n 1";
+        
+        else if ($ano % 100 == 0)
+            //echo $ano / 100 ," Século";
+            echo "século " , $ano / 100 ;
+        else
+            //echo floor($ano / 100) + 1, " Século";    
+            echo "século ", floor($ano / 100) +1 ;    
     }
 
     
@@ -36,8 +50,29 @@ class Funcoes
     Número = 29 resposta = 23
 
      * */
-    public function PrimoAnterior(int $numero): int {
-        
+    public function PrimoAnterior(int $numero): int
+    {
+        if($numero == 0){
+            echo 'fose';
+        }
+        for($i = 1; $i <= $numero; $i++)
+        {
+            $divisores = 0;
+            
+            for($j = $i; $j >= 1; $j--)
+            {
+                if (($i % $j) == 0) {
+                    $divisores++;
+                }
+            }
+            
+            if ($divisores == 2)
+            {
+                $arr[] = $i;
+            }
+        }
+
+        echo $arr[count($arr)-2];
     }
 
 
@@ -65,7 +100,10 @@ class Funcoes
 	resposta = 25
 
      * */
-    public function SegundoMaior(array $arr): int {
+    public function SegundoMaior(array $arr):int
+    {
+        sort($arr);
+        echo "resposta = ",$arr[count($arr)-2];
         
     }
 	
@@ -109,4 +147,11 @@ class Funcoes
 	public function SequenciaCrescente(array $arr): boolean {
         
     }
+
+
 }
+
+$instance = new Funcoes();
+$instance->PrimoAnterior(101);
+$instance->SeculoAno(700);
+$instance->SegundoMaior([441,3,1,5,7]);
